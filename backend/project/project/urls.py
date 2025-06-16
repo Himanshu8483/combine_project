@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
-from app.views import index, create_order, verify_payment, OrderViewSet
+from app.views import create_order, verify_payment, OrderViewSet
+from app.views import FrontendAppView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -30,9 +31,8 @@ urlpatterns = [
     path('create_order/', create_order),
     path('verify_payment/', verify_payment),
     path('', include(router.urls)),
-
-    # This should be the last one: catch-all route for React
-    re_path(r'^.*$', index),  # Anything else goes to React's index.html
+    # Catch-all route for React
+    re_path(r'^.*$', FrontendAppView.as_view()),
 ]
 
 # Serve media and static in development

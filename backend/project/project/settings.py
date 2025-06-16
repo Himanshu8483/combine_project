@@ -94,6 +94,7 @@ ROOT_URLCONF = 'project.urls'
 
 
 
+import os
 
 TEMPLATES = [
     {
@@ -185,7 +186,6 @@ TEMPLATES[0]['DIRS'] = [BASE_DIR / 'frontend']
 
 
 
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
