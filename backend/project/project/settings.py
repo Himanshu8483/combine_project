@@ -94,12 +94,11 @@ ROOT_URLCONF = 'project.urls'
 
 
 
-import os
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Point to the folder containing index.html
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ Add this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -186,6 +185,7 @@ TEMPLATES[0]['DIRS'] = [BASE_DIR / 'frontend']
 
 
 
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent

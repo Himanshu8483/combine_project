@@ -57,11 +57,7 @@ def verify_payment(request):
         return HttpResponseBadRequest("Payment verification failed")
 
 
-import os
-from django.http import FileResponse
-from django.views import View
+from django.shortcuts import render
 
-class FrontendAppView(View):
-    def get(self, request):
-        file_path = os.path.join(os.path.dirname(__file__), '../../frontend/dist/index.html')
-        return FileResponse(open(file_path, 'rb'))
+def index(request):
+    return render(request, 'index.html')  # Point to React's index.html
