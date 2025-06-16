@@ -98,7 +98,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # ✅ Add this line
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Point to the folder containing index.html
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

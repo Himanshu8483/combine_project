@@ -15,27 +15,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from rest_framework.routers import DefaultRouter
-from app.views import *
+from app.views import index, create_order, verify_payment, OrderViewSet
 
 from django.conf import settings
 from django.conf.urls.static import static
 
-
 router = DefaultRouter()
 router.register(r'orders', OrderViewSet)
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index),
     path('create_order/', create_order),
     path('verify_payment/', verify_payment),
     path('', include(router.urls)),
-    
-# ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+    # This should be the last one: catch-all route for React
+    re_path(r'^.*$', index),  # Anything else goes to React's index.html
 ]
 
-# Add this at the bottom
+# Serve media and static in development
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])
