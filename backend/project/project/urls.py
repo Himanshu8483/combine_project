@@ -27,14 +27,15 @@ router = DefaultRouter()
 router.register(r'orders', OrderViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     
     path('create_order/', create_order),
     path('verify_payment/', verify_payment),
-    re_path(r'^.*$', index),  # Anything else goes to React's index.html
+]
 
-# ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
+# Serve React app for all other paths (fallback route)
+urlpatterns += [
+    re_path(r'^.*$', index),  # ✅ wildcard route for React frontend
 ]
 
 # Add this at the bottom
