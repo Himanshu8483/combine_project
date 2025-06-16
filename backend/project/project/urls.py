@@ -27,9 +27,10 @@ router = DefaultRouter()
 router.register(r'orders', OrderViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    
     path('create_order/', create_order),
     path('verify_payment/', verify_payment),
-    path('', include(router.urls)),
     re_path(r'^.*$', index),  # Anything else goes to React's index.html
 
 # ]   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
