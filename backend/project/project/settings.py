@@ -98,7 +98,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # ✅ Add this line
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -181,3 +181,19 @@ RAZORPAY_KEY_ID = 'rzp_test_pr99iascS1WRtU'
 RAZORPAY_KEY_SECRET = 'UTDIzPGwICnAssu3Q3lk7zUi'
 
 TEMPLATES[0]['DIRS'] = [BASE_DIR / 'frontend']
+
+
+
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",  # for your development static files (like React dist/assets)
+]
+
+STATIC_ROOT = BASE_DIR / "staticfiles"  # where collectstatic will copy to (for production)
