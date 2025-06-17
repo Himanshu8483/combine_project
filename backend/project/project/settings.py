@@ -96,10 +96,9 @@ USE_TZ = True
 STATIC_URL = '/assets/'  # 👈 matches Vite asset path
 
 STATICFILES_DIRS = [
-    BASE_DIR / 'app' / 'static',  # your Django app static
-    
-    BASE_DIR / 'frontend' / 'dist' / 'assets',  # ✅ Vite assets
+
 ]
+
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'  # Used by collectstatic
 

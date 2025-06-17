@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: my-fullstack-app
-    env: python
-    buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn backend.project.wsgi"
-    envVars:
-      - key: DJANGO_SETTINGS_MODULE
-        value: backend.project.project.settings

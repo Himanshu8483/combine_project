@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from app.views import *
 
@@ -27,17 +27,13 @@ router = DefaultRouter()
 router.register(r'orders', OrderViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
     
     path('create_order/', create_order),
     path('verify_payment/', verify_payment),
 ]
 
-# Serve React app for all other paths (fallback route)
-urlpatterns += [
-    re_path(r'^.*$', index),  # ✅ wildcard route for React frontend
-]
+
 
 # Add this at the bottom
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

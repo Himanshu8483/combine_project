@@ -51,11 +51,24 @@ def verify_payment(request):
 
     if generated_signature == signature:
         # ✅ Save order to database
-        # Order.objects.create(...your data...)
-        return JsonResponse({"status": "Payment verified"})
+        Order.objects.create(
+            name=data.get('name'),
+            address=data.get('address'),
+            number=data.get('number'),
+            email=data.get('email'),
+            productName=data.get('productName'),
+            productPrice=data.get('productPrice'),
+            productImage=data.get('productImage'),
+            quantity=data.get('quantity'),
+            totalAmount=data.get('totalAmount'),
+            payment_mode=data.get('payment'),
+            razorpay_order_id=order_id,
+            razorpay_payment_id=payment_id,
+            razorpay_signature=signature
+        )
+        return JsonResponse({"status": "Payment verified and order placed"})
     else:
         return HttpResponseBadRequest("Payment verification failed")
-
 
 from django.http import FileResponse
 import os
